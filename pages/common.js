@@ -7,14 +7,28 @@ document.getElementById('ackLink').onclick = function(e) {
   location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
 };
 
-document.getElementById('backToTop').onclick = function() {
-  document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
+// ── Back-to-top ──────────────────────────────────────────────────────
+var backToTop   = document.getElementById('backToTop');
+var mainContent = document.getElementById('mainContent');
+
+backToTop.onclick = function() {
+  mainContent.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-var toggle = document.getElementById('mobileMenuToggle');
+mainContent.addEventListener('scroll', function() {
+  if (mainContent.scrollTop > 100) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+}, { passive: true });
+
+// ── Mobile menu toggle ───────────────────────────────────────────────
+var toggle  = document.getElementById('mobileMenuToggle');
 var sidebar = document.getElementById('sidebar');
 toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
 
+// ── Search ───────────────────────────────────────────────────────────
 var searchInput = document.getElementById('sidebarSearch');
 document.getElementById('searchBtn').onclick = doSearch;
 searchInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') doSearch(); });
@@ -23,9 +37,6 @@ document.getElementById('clearSearch').onclick = function() { searchInput.value 
 function doSearch() {
   var q = searchInput.value.trim().toLowerCase();
   if (!q) return;
-
-  // Keyword map: each entry is [destination, ...terms]
-  // Matching: query contains term, or term starts with query
   var pages = [
     { file: 'hr.html',         terms: ['hr', 'people', 'hiring', 'hire', 'onboard', 'employee', 'contractor', 'training', 'background check', 'offboard', 'exit interview'] },
     { file: 'finance.html',    terms: ['finance', 'expense', 'invoice', 'travel', 'fraud', 'budget', 'purchase', 'reimburs', 'payment', 'spending', 'receipts'] },
@@ -38,7 +49,6 @@ function doSearch() {
     { file: 'acknowledge.html',terms: ['acknowledge', 'acknowledgment', 'confirm', 'sign off', 'complete'] },
     { file: 'overview.html',   terms: ['overview', 'handbook', 'whistleblow', 'golden rule', 'policy', 'about'] },
   ];
-
   for (var i = 0; i < pages.length; i++) {
     var terms = pages[i].terms;
     for (var j = 0; j < terms.length; j++) {
@@ -49,7 +59,40 @@ function doSearch() {
       }
     }
   }
-
-  // No match — stay on overview
   location.href = 'overview.html';
+}
+
+// ── Nav item staggered entrance ──────────────────────────────────────
+document.querySelectorAll('.nav-item').forEach(function(el, i) {
+  el.style.animationDelay = (0.16 + i * 0.045) + 's';
+});
+
+// ── Scroll-reveal for policy content ─────────────────────────────────
+var revealItems = document.querySelectorAll('.policy-section-block > *');
+if (revealItems.length) {
+  revealItems.forEach(function(el) { el.classList.add('reveal-item'); });
+
+  var observer = new IntersectionObserver(function(entries) {
+    // Sort visible entries top-to-bottom for a natural stagger
+    var visible = entries.filter(function(e) { return e.isIntersecting; });
+    visible.sort(function(a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+
+    visible.forEach(function(entry, i) {
+      var el = entry.target;
+      el.style.transitionDelay = (i * 0.07) + 's';
+      // rAF ensures the class change triggers a transition
+      requestAnimationFrame(function() {
+        el.classList.add('revealed');
+        // Remove delay so subsequent scroll-ins are instant
+        setTimeout(function() { el.style.transitionDelay = ''; }, 700);
+      });
+      observer.unobserve(el);
+    });
+  }, {
+    root: mainContent,
+    threshold: 0.05,
+    rootMargin: '0px 0px -10px 0px'
+  });
+
+  revealItems.forEach(function(el) { observer.observe(el); });
 }
