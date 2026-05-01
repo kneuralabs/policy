@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KNEURALABS · HR & People</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wiki-app">
+  <div class="wiki-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>KNEURALABS</h1>
+      <p>policy handbook</p>
+    </div>
+    <div class="search-area">
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" placeholder="Search policies">
+        <button id="searchBtn">Go</button>
+      </div>
+      <div style="text-align:right"><span id="clearSearch" class="reset-link">clear</span></div>
+    </div>
+    <div class="nav-menu">
+      <a class="nav-item" href="overview.html">Overview</a>
+      <a class="nav-item active" href="hr.html">HR & People</a>
+      <a class="nav-item" href="finance.html">Finance</a>
+      <a class="nav-item" href="it.html">IT & Security</a>
+      <a class="nav-item" href="legal.html">Legal & AI Rules</a>
+      <a class="nav-item" href="conduct.html">Workplace Conduct</a>
+      <a class="nav-item" href="safety.html">Safe Workplace</a>
+      <a class="nav-item" href="workplace.html">Workplace & IT Rules</a>
+      <a class="nav-item" href="privacy.html">Data Privacy</a>
+      <a class="nav-item" href="acknowledge.html">Acknowledge</a>
+    </div>
+    <div class="sidebar-ack-link">
+      <a class="ack-link" id="ackLink" href="#">Acknowledge policies</a>
+    </div>
+    <div class="sidebar-footer">Confidential · v2.0</div>
+  </div>
+  <div class="wiki-main" id="mainContent" style="background-color:#E8604C;color:#FEFEF7">
+    <div class="policy-view">
+      <div class="policy-title">HR &amp; People Rules</div>
+            <div class="policy-id">KNL-HR-001</div>
+            <div class="policy-section-block">
+              <ul>
+                <li><strong>Hiring:</strong> We choose people based on skill and fit. We run background checks and you must sign agreements about keeping secrets, owning your work, and using AI ethically.</li>
+                <li><strong>Training:</strong> Within your first 5 days, finish training on AI safety and protecting private information.</li>
+                <li><strong>Using AI tools:</strong> Only use AI tools that the company approves. Never paste client data into public AI like ChatGPT. Always double-check AI results.</li>
+                <li><strong>How to act:</strong> Be honest, protect data, and tell your manager if you have a personal conflict with a client or project.</li>
+                <li><strong>Leaving the company:</strong> Return all laptops, phones, and badges. Your access will be turned off within 24 hours. Your duty to keep secrets never ends.</li>
+              </ul>
+              <div class="vendor-note">Our HR partner must keep security certificates, send monthly reports, and tell us within 24 hours if any data breach happens.</div>
+            </div>
+    </div>
+  </div>
+  <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
+  <button class="back2top" id="backToTop">Top</button>
+</div>
+<script>
+  if (!sessionStorage.getItem('knl_auth')) location.href = '../index.html';
+  document.getElementById('ackLink').onclick = function(e) {
+    e.preventDefault();
+    var s = encodeURIComponent('Policy Acknowledgment - KNEURALABS');
+    var b = encodeURIComponent('I have read and understood the KNEURALABS policy handbook and agree to comply.\n\nName: [Your name]\nRole: [Your role]\nDate: ' + new Date().toLocaleDateString());
+    location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
+  };
+  document.getElementById('backToTop').onclick = function() {
+    document.getElementById('mainContent').scrollTo({top:0,behavior:'smooth'});
+  };
+  var toggle = document.getElementById('mobileMenuToggle');
+  var sidebar = document.getElementById('sidebar');
+  toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
+  var searchInput = document.getElementById('sidebarSearch');
+  document.getElementById('searchBtn').onclick = doSearch;
+  searchInput.addEventListener('keypress', function(e) { if(e.key==='Enter') doSearch(); });
+  document.getElementById('clearSearch').onclick = function() { searchInput.value=''; };
+  function doSearch() {
+    var q = searchInput.value.trim();
+    if (!q) return;
+    location.href = 'overview.html?q=' + encodeURIComponent(q);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KNEURALABS · Workplace Conduct</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wiki-app">
+  <div class="wiki-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>KNEURALABS</h1>
+      <p>policy handbook</p>
+    </div>
+    <div class="search-area">
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" placeholder="Search policies">
+        <button id="searchBtn">Go</button>
+      </div>
+      <div style="text-align:right"><span id="clearSearch" class="reset-link">clear</span></div>
+    </div>
+    <div class="nav-menu">
+      <a class="nav-item" href="overview.html">Overview</a>
+      <a class="nav-item" href="hr.html">HR & People</a>
+      <a class="nav-item" href="finance.html">Finance</a>
+      <a class="nav-item" href="it.html">IT & Security</a>
+      <a class="nav-item" href="legal.html">Legal & AI Rules</a>
+      <a class="nav-item active" href="conduct.html">Workplace Conduct</a>
+      <a class="nav-item" href="safety.html">Safe Workplace</a>
+      <a class="nav-item" href="workplace.html">Workplace & IT Rules</a>
+      <a class="nav-item" href="privacy.html">Data Privacy</a>
+      <a class="nav-item" href="acknowledge.html">Acknowledge</a>
+    </div>
+    <div class="sidebar-ack-link">
+      <a class="ack-link" id="ackLink" href="#">Acknowledge policies</a>
+    </div>
+    <div class="sidebar-footer">Confidential · v2.0</div>
+  </div>
+  <div class="wiki-main" id="mainContent" style="background-color:#FFFFFF;color:#111111">
+    <div class="policy-view">
+      <div class="policy-title">Workplace Conduct</div>
+            <div class="policy-id">KNL-ETH-001</div>
+            <div class="policy-section-block">
+              <ul>
+                <li><strong>Ethics:</strong> Always act honestly. Tell your manager if you have a conflict of interest. Do not accept gifts worth more than $50 without approval.</li>
+                <li><strong>Equal opportunity:</strong> We do not discriminate based on race, gender, age, disability, or other protected traits. We provide reasonable accommodations.</li>
+                <li><strong>Anti-bribery:</strong> No bribes, kickbacks, or "facilitation payments" ever. Follow the US Foreign Corrupt Practices Act (FCPA).</li>
+                <li><strong>Reporting violations:</strong> Report misconduct to our legal partner. We do not tolerate retaliation against anyone who reports in good faith.</li>
+              </ul>
+            </div>
+    </div>
+  </div>
+  <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
+  <button class="back2top" id="backToTop">Top</button>
+</div>
+<script>
+  if (!sessionStorage.getItem('knl_auth')) location.href = '../index.html';
+  document.getElementById('ackLink').onclick = function(e) {
+    e.preventDefault();
+    var s = encodeURIComponent('Policy Acknowledgment - KNEURALABS');
+    var b = encodeURIComponent('I have read and understood the KNEURALABS policy handbook and agree to comply.\n\nName: [Your name]\nRole: [Your role]\nDate: ' + new Date().toLocaleDateString());
+    location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
+  };
+  document.getElementById('backToTop').onclick = function() {
+    document.getElementById('mainContent').scrollTo({top:0,behavior:'smooth'});
+  };
+  var toggle = document.getElementById('mobileMenuToggle');
+  var sidebar = document.getElementById('sidebar');
+  toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
+  var searchInput = document.getElementById('sidebarSearch');
+  document.getElementById('searchBtn').onclick = doSearch;
+  searchInput.addEventListener('keypress', function(e) { if(e.key==='Enter') doSearch(); });
+  document.getElementById('clearSearch').onclick = function() { searchInput.value=''; };
+  function doSearch() {
+    var q = searchInput.value.trim();
+    if (!q) return;
+    location.href = 'overview.html?q=' + encodeURIComponent(q);
+  }
+</script>
+</body>
+</html>

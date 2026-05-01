@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KNEURALABS · Finance</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wiki-app">
+  <div class="wiki-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>KNEURALABS</h1>
+      <p>policy handbook</p>
+    </div>
+    <div class="search-area">
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" placeholder="Search policies">
+        <button id="searchBtn">Go</button>
+      </div>
+      <div style="text-align:right"><span id="clearSearch" class="reset-link">clear</span></div>
+    </div>
+    <div class="nav-menu">
+      <a class="nav-item" href="overview.html">Overview</a>
+      <a class="nav-item" href="hr.html">HR & People</a>
+      <a class="nav-item active" href="finance.html">Finance</a>
+      <a class="nav-item" href="it.html">IT & Security</a>
+      <a class="nav-item" href="legal.html">Legal & AI Rules</a>
+      <a class="nav-item" href="conduct.html">Workplace Conduct</a>
+      <a class="nav-item" href="safety.html">Safe Workplace</a>
+      <a class="nav-item" href="workplace.html">Workplace & IT Rules</a>
+      <a class="nav-item" href="privacy.html">Data Privacy</a>
+      <a class="nav-item" href="acknowledge.html">Acknowledge</a>
+    </div>
+    <div class="sidebar-ack-link">
+      <a class="ack-link" id="ackLink" href="#">Acknowledge policies</a>
+    </div>
+    <div class="sidebar-footer">Confidential · v2.0</div>
+  </div>
+  <div class="wiki-main" id="mainContent" style="background-color:#1A7B8C;color:#FEFEF7">
+    <div class="policy-view">
+      <div class="policy-title">Finance &amp; Expenses</div>
+            <div class="policy-id">KNL-FIN-001</div>
+            <div class="policy-section-block">
+              <ul>
+                <li><strong>Getting approvals:</strong> Up to $500 → ask CEO or MD. $500–$5,000 → same with a note. $5k–$25k → both CEO and MD. Over $25k → both must agree and write a reason.</li>
+                <li><strong>Sending invoices:</strong> Send within 5 days after finishing work. Payment due in 30 days. Include contract or purchase order number.</li>
+                <li><strong>Expense claims:</strong> Submit receipts within 15 days. We don't pay for personal items or entertainment over $150.</li>
+                <li><strong>Fraud:</strong> If you suspect cheating or stealing, tell the CEO or MD immediately. The law protects whistleblowers.</li>
+              </ul>
+              <div class="vendor-note">Our finance partner keeps audit logs, provides monthly financial reports by the 10th, and stores records for 7 years.</div>
+            </div>
+    </div>
+  </div>
+  <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
+  <button class="back2top" id="backToTop">Top</button>
+</div>
+<script>
+  if (!sessionStorage.getItem('knl_auth')) location.href = '../index.html';
+  document.getElementById('ackLink').onclick = function(e) {
+    e.preventDefault();
+    var s = encodeURIComponent('Policy Acknowledgment - KNEURALABS');
+    var b = encodeURIComponent('I have read and understood the KNEURALABS policy handbook and agree to comply.\n\nName: [Your name]\nRole: [Your role]\nDate: ' + new Date().toLocaleDateString());
+    location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
+  };
+  document.getElementById('backToTop').onclick = function() {
+    document.getElementById('mainContent').scrollTo({top:0,behavior:'smooth'});
+  };
+  var toggle = document.getElementById('mobileMenuToggle');
+  var sidebar = document.getElementById('sidebar');
+  toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
+  var searchInput = document.getElementById('sidebarSearch');
+  document.getElementById('searchBtn').onclick = doSearch;
+  searchInput.addEventListener('keypress', function(e) { if(e.key==='Enter') doSearch(); });
+  document.getElementById('clearSearch').onclick = function() { searchInput.value=''; };
+  function doSearch() {
+    var q = searchInput.value.trim();
+    if (!q) return;
+    location.href = 'overview.html?q=' + encodeURIComponent(q);
+  }
+</script>
+</body>
+</html>
