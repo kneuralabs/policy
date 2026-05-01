@@ -22,16 +22,27 @@
   const btn = document.getElementById('magicBtn');
   const inp = document.getElementById('magicWord');
   const err = document.getElementById('magicError');
+
+  function shake(el) {
+    el.classList.remove('shake');
+    void el.offsetWidth; // force reflow to restart animation
+    el.classList.add('shake');
+    el.addEventListener('animationend', () => el.classList.remove('shake'), { once: true });
+  }
+
   function check() {
     if (inp.value.trim().toLowerCase() === 'hello') {
-      sessionStorage.setItem('knl_auth','1');
+      sessionStorage.setItem('knl_auth', '1');
       location.href = 'pages/overview.html';
     } else {
       err.innerText = 'Wrong magic word';
+      shake(inp);
+      shake(err);
       inp.value = '';
       inp.focus();
     }
   }
+
   btn.addEventListener('click', check);
   inp.addEventListener('keypress', e => { if (e.key === 'Enter') check(); });
 </script>

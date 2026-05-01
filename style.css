@@ -55,3 +55,70 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text',system-u
   .magic-field{font-size:.95rem;padding:.7rem .2rem}
   .policy-title{font-size:1.9rem}
 }
+
+/* ─── Keyframes ────────────────────────────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInLeft{
+  from{opacity:0;transform:translateX(-16px)}
+  to  {opacity:1;transform:translateX(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to  {opacity:1}
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  18%    {transform:translateX(-7px)}
+  36%    {transform:translateX(7px)}
+  54%    {transform:translateX(-4px)}
+  72%    {transform:translateX(4px)}
+}
+
+/* ─── Landing page ─────────────────────────────────────────────────── */
+.landing-card{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) both}
+.magic-field{transition:border-color .2s ease}
+.magic-btn{transition:background-color .15s ease,transform .1s ease,opacity .15s ease}
+.magic-btn:active{transform:scale(.97)}
+.magic-field.shake,.error-msg.shake{animation:shake .42s cubic-bezier(.22,1,.36,1)}
+
+/* ─── Sidebar entrance ─────────────────────────────────────────────── */
+.sidebar-header{animation:fadeIn .5s cubic-bezier(.22,1,.36,1) .05s both}
+.search-area{animation:fadeIn .45s cubic-bezier(.22,1,.36,1) .12s both}
+.sidebar-ack-link{animation:fadeIn .4s ease .38s both}
+.sidebar-footer{animation:fadeIn .4s ease .44s both}
+
+/* nav items — delay injected per-item by JS */
+.nav-item{
+  animation:fadeInLeft .45s cubic-bezier(.22,1,.36,1) both;
+  transition:color .18s ease,padding-left .22s cubic-bezier(.22,1,.36,1),border-left-color .2s ease,opacity .18s ease
+}
+
+/* ─── Main content entrance ────────────────────────────────────────── */
+.policy-title{animation:fadeUp .55s cubic-bezier(.22,1,.36,1) .07s both}
+.policy-id{animation:fadeUp .5s cubic-bezier(.22,1,.36,1) .15s both}
+
+/* ─── Scroll-reveal items ──────────────────────────────────────────── */
+.reveal-item{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .52s cubic-bezier(.22,1,.36,1),transform .52s cubic-bezier(.22,1,.36,1)
+}
+.reveal-item.revealed{opacity:1;transform:none}
+
+/* ─── Back-to-top show / hide ──────────────────────────────────────── */
+.back2top{
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:opacity .28s ease,transform .28s ease,background-color .15s ease
+}
+.back2top.visible{opacity:1;transform:none;pointer-events:auto}
+.back2top:active{transform:scale(.94)!important;transition-duration:.08s!important}
+
+/* ─── Reduced-motion respect ───────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-delay:.01ms!important;transition-duration:.01ms!important}
+}
