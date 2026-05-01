@@ -79,29 +79,6 @@
   <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
   <button class="back2top" id="backToTop">Top</button>
 </div>
-<script>
-  if (!sessionStorage.getItem('knl_auth')) location.href = '../index.html';
-  document.getElementById('ackLink').onclick = function(e) {
-    e.preventDefault();
-    var s = encodeURIComponent('Policy Acknowledgment - KNEURALABS');
-    var b = encodeURIComponent('I have read and understood the KNEURALABS policy handbook and agree to comply.\n\nName: [Your name]\nRole: [Your role]\nDate: ' + new Date().toLocaleDateString());
-    location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
-  };
-  document.getElementById('backToTop').onclick = function() {
-    document.getElementById('mainContent').scrollTo({top:0,behavior:'smooth'});
-  };
-  var toggle = document.getElementById('mobileMenuToggle');
-  var sidebar = document.getElementById('sidebar');
-  toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
-  var searchInput = document.getElementById('sidebarSearch');
-  document.getElementById('searchBtn').onclick = doSearch;
-  searchInput.addEventListener('keypress', function(e) { if(e.key==='Enter') doSearch(); });
-  document.getElementById('clearSearch').onclick = function() { searchInput.value=''; };
-  function doSearch() {
-    var q = searchInput.value.trim();
-    if (!q) return;
-    location.href = 'overview.html?q=' + encodeURIComponent(q);
-  }
-</script>
+<script src="common.js"></script>
 </body>
 </html>
