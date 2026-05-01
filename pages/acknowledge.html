@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KNEURALABS · Acknowledge</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wiki-app">
+  <div class="wiki-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>KNEURALABS</h1>
+      <p>policy handbook</p>
+    </div>
+    <div class="search-area">
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" placeholder="Search policies">
+        <button id="searchBtn">Go</button>
+      </div>
+      <div style="text-align:right"><span id="clearSearch" class="reset-link">clear</span></div>
+    </div>
+    <div class="nav-menu">
+      <a class="nav-item" href="overview.html">Overview</a>
+      <a class="nav-item" href="hr.html">HR & People</a>
+      <a class="nav-item" href="finance.html">Finance</a>
+      <a class="nav-item" href="it.html">IT & Security</a>
+      <a class="nav-item" href="legal.html">Legal & AI Rules</a>
+      <a class="nav-item" href="conduct.html">Workplace Conduct</a>
+      <a class="nav-item" href="safety.html">Safe Workplace</a>
+      <a class="nav-item" href="workplace.html">Workplace & IT Rules</a>
+      <a class="nav-item" href="privacy.html">Data Privacy</a>
+      <a class="nav-item active" href="acknowledge.html">Acknowledge</a>
+    </div>
+    <div class="sidebar-ack-link">
+      <a class="ack-link" id="ackLink" href="#">Acknowledge policies</a>
+    </div>
+    <div class="sidebar-footer">Confidential · v2.0</div>
+  </div>
+  <div class="wiki-main" id="mainContent" style="background-color:#0A7A50;color:#FEFEF7">
+    <div class="policy-view">
+      <div class="policy-title">Policy Acknowledgment</div>
+            <div class="policy-id">KNL-ACK-001</div>
+            <div class="policy-section-block">
+              <p>You can confirm you have read and agree to all policies by using the "Acknowledge policies" link at the bottom of the sidebar.</p>
+              <div class="plain-note">No button is needed here — simply click "Acknowledge policies" in the left menu to send your confirmation.</div>
+              <div class="footnote">Policy version 1.0, effective April 1, 2025. Next review: April 1, 2026.</div>
+            </div>
+    </div>
+  </div>
+  <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
+  <button class="back2top" id="backToTop">Top</button>
+</div>
+<script>
+  if (!sessionStorage.getItem('knl_auth')) location.href = '../index.html';
+  document.getElementById('ackLink').onclick = function(e) {
+    e.preventDefault();
+    var s = encodeURIComponent('Policy Acknowledgment - KNEURALABS');
+    var b = encodeURIComponent('I have read and understood the KNEURALABS policy handbook and agree to comply.\n\nName: [Your name]\nRole: [Your role]\nDate: ' + new Date().toLocaleDateString());
+    location.href = 'mailto:hello@kneuralabs.com?subject=' + s + '&body=' + b;
+  };
+  document.getElementById('backToTop').onclick = function() {
+    document.getElementById('mainContent').scrollTo({top:0,behavior:'smooth'});
+  };
+  var toggle = document.getElementById('mobileMenuToggle');
+  var sidebar = document.getElementById('sidebar');
+  toggle.onclick = function() { sidebar.classList.toggle('mobile-open'); };
+  var searchInput = document.getElementById('sidebarSearch');
+  document.getElementById('searchBtn').onclick = doSearch;
+  searchInput.addEventListener('keypress', function(e) { if(e.key==='Enter') doSearch(); });
+  document.getElementById('clearSearch').onclick = function() { searchInput.value=''; };
+  function doSearch() {
+    var q = searchInput.value.trim();
+    if (!q) return;
+    location.href = 'overview.html?q=' + encodeURIComponent(q);
+  }
+</script>
+</body>
+</html>
