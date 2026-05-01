@@ -40,16 +40,50 @@
   <div class="wiki-main" id="mainContent" style="background-color:#3D5166;color:#FEFEF7">
     <div class="policy-view">
       <div class="policy-title">IT &amp; Security</div>
-            <div class="policy-id">KNL-IT-001</div>
-            <div class="policy-section-block">
-              <ul>
-                <li><strong>Types of data:</strong> "Restricted" = client personal info, passwords → always encrypt, use MFA, never feed into AI. "Confidential" → encrypt when stored. "Internal" → keep inside the company.</li>
-                <li><strong>Access rules:</strong> Turn on multi-factor authentication for every account. Only get the access you really need. Never share your password.</li>
-                <li><strong>AI governance:</strong> Use only approved AI tools. Using unapproved "shadow AI" is forbidden.</li>
-                <li><strong>Security incidents:</strong> Critical incidents → report within 1 hour. Client data leaked → tell leadership within 2 hours; regulators within 72 hours if required.</li>
-              </ul>
-              <div class="vendor-note">Our IT partner must be ISO 27001 or SOC2 certified, monitor systems 24/7, and run a hack test every year.</div>
-            </div>
+<div class="policy-id">KNL-IT-001 · Last reviewed April 2026</div>
+<div class="policy-section-block">
+  <p>This section explains how to keep our systems, data, and client information safe. You do not need to be a tech expert to follow these rules — they are written in plain language.</p>
+
+  <p><strong>Understanding the three types of data we handle</strong></p>
+  <ul>
+    <li><strong>Restricted (most sensitive):</strong> Client personal information (names, emails, IDs), passwords, API keys, and trade secrets. Rules: always encrypt it, only access it if your job requires it, use multi-factor authentication, and <em>never</em> paste it into any AI tool (approved or not).</li>
+    <li><strong>Confidential:</strong> Internal reports, business strategies, employee salaries. Rules: encrypt when stored or sent by email, do not share outside the company without permission.</li>
+    <li><strong>Internal:</strong> Meeting notes, general project updates, team announcements. Rules: keep inside the company, do not post on public websites or social media.</li>
+  </ul>
+
+  <p><strong>Passwords and account security</strong></p>
+  <ul>
+    <li><strong>Use a unique, strong password</strong> for every work account. A strong password is at least 12 characters and includes letters, numbers, and symbols.</li>
+    <li><strong>Turn on Multi-Factor Authentication (MFA)</strong> for every work account that supports it. MFA means you need your password <em>and</em> a second check (like a code on your phone) to log in. This stops hackers even if they steal your password.</li>
+    <li><strong>Never share your password</strong> with anyone — not even IT support. Legitimate IT staff will never ask for your password.</li>
+    <li>Use a password manager (ask IT for the approved one) to keep track of passwords safely.</li>
+  </ul>
+
+  <p><strong>AI tool rules</strong></p>
+  <ul>
+    <li>Only use AI tools that appear on the company's approved list.</li>
+    <li>"Shadow AI" means using an unapproved AI tool for work tasks. This is <strong>strictly forbidden</strong> — even if the tool seems helpful and harmless.</li>
+    <li>Why? Unapproved tools may store your inputs, share data with third parties, or have security flaws we have not assessed.</li>
+  </ul>
+
+  <p><strong>What to do if you think something has gone wrong (security incidents)</strong></p>
+  <ul>
+    <li><strong>Critical incidents</strong> (system hacked, ransomware, major outage): Report to IT and leadership within <strong>1 hour</strong>. Do not wait until you are sure — report early.</li>
+    <li><strong>Client data may have been exposed:</strong> Tell leadership within <strong>2 hours</strong>. We are legally required to notify regulators within 72 hours in many cases.</li>
+    <li><strong>Lost or stolen laptop/phone:</strong> Report to IT immediately so we can remotely wipe the device before data is accessed.</li>
+    <li><strong>Suspicious email (phishing):</strong> Do not click links or attachments. Forward it to IT and delete it.</li>
+    <li><em>Tip: If something feels wrong, it probably is. Report first, investigate later.</em></li>
+  </ul>
+
+  <p><strong>Software and devices</strong></p>
+  <ul>
+    <li>Only install software that IT has approved. Unapproved software can contain viruses or spyware.</li>
+    <li>Keep your device updated — install security patches when prompted. These fix known vulnerabilities.</li>
+    <li>Lock your computer whenever you step away from your desk, even for a minute. Use Win+L (Windows) or Ctrl+Cmd+Q (Mac).</li>
+  </ul>
+
+  <div class="vendor-note"><strong>For IT vendors and partners:</strong> You must hold ISO 27001 or SOC 2 certification, provide 24/7 system monitoring, conduct an annual penetration test, and report any security incidents to us within 1 hour of detection.</div>
+</div>
     </div>
   </div>
   <button class="menu-toggle" id="mobileMenuToggle">Menu</button>
