@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;background:#fff;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.45}
 .landing-container{position:fixed;top:0;left:0;width:100%;height:100%;background:#F7F5F0;display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .4s,visibility .4s;padding:1.5rem}
@@ -39,6 +40,18 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text',system-u
 .policy-section-block li{margin:1.1rem 0;line-height:1.55;font-size:.98rem}
 .plain-note{margin:1.4rem 0;font-size:.95rem;border-left:2px solid currentColor;padding-left:1.2rem;opacity:.88}
 .vendor-note{margin:1.6rem 0;font-size:.9rem;padding:.6rem 0 .3rem;border-top:1px solid rgba(0,0,0,.1);font-weight:450}
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0 1.6rem}
+.dos-donts .card{padding:1.1rem 1.2rem;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px)}
+.dos-donts .card h4{font-size:.78rem;font-weight:620;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.dos-donts .card h4::before{content:"";display:inline-block;width:.55rem;height:.55rem;border-radius:50%}
+.dos-donts .card.do h4::before{background:#3CB371}
+.dos-donts .card.dont h4::before{background:#FF6B6B}
+.dos-donts .card ul{margin:0;list-style:none}
+.dos-donts .card li{font-size:.88rem;line-height:1.45;margin:.55rem 0;padding-left:1.1rem;position:relative;font-weight:400}
+.dos-donts .card.do li::before{content:"✓";position:absolute;left:0;color:#3CB371;font-weight:700}
+.dos-donts .card.dont li::before{content:"✕";position:absolute;left:0;color:#FF6B6B;font-weight:700}
+.wiki-main[style*="F7F5F0"] .dos-donts .card,.wiki-main[style*="FFFFFF"] .dos-donts .card{background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.08)}
+@media(max-width:680px){.dos-donts{grid-template-columns:1fr;gap:.8rem}}
 .footnote{font-size:.7rem;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.1);opacity:.7}
 .back2top{position:fixed;bottom:1.5rem;right:1.5rem;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);color:#fff;border:none;font-size:.7rem;padding:.45rem .9rem;cursor:pointer;font-family:inherit;font-weight:460;z-index:99;border-radius:40px}
 .menu-toggle{display:none}
