@@ -45,11 +45,23 @@
   <p>This section explains how to keep our systems, data, and client information safe. You do not need to be a tech expert to follow these rules — they are written in plain language.</p>
 
   <p><strong>Understanding the three types of data we handle</strong></p>
-  <ul>
-    <li><strong>Restricted (most sensitive):</strong> Client personal information (names, emails, IDs), passwords, API keys, and trade secrets. Rules: always encrypt it, only access it if your job requires it, use multi-factor authentication, and <em>never</em> paste it into any AI tool (approved or not).</li>
-    <li><strong>Confidential:</strong> Internal reports, business strategies, employee salaries. Rules: encrypt when stored or sent by email, do not share outside the company without permission.</li>
-    <li><strong>Internal:</strong> Meeting notes, general project updates, team announcements. Rules: keep inside the company, do not post on public websites or social media.</li>
-  </ul>
+  <div class="infographic">
+    <h3>Data sensitivity at a glance</h3>
+    <div class="tier-bars">
+      <div class="tier-row">
+        <div class="tier-label">Restricted</div>
+        <div class="tier-bar r"><span>Client PII, passwords, API keys · encrypt always · never paste into AI</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-label">Confidential</div>
+        <div class="tier-bar c"><span>Reports, strategy, salaries · encrypt &amp; don't share outside</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-label">Internal</div>
+        <div class="tier-bar i"><span>Notes, updates · keep off public sites &amp; social media</span></div>
+      </div>
+    </div>
+  </div>
 
   <p><strong>Passwords and account security</strong></p>
   <ul>
@@ -66,14 +78,17 @@
     <li>Why? Unapproved tools may store your inputs, share data with third parties, or have security flaws we have not assessed.</li>
   </ul>
 
-  <p><strong>What to do if you think something has gone wrong (security incidents)</strong></p>
-  <ul>
-    <li><strong>Critical incidents</strong> (system hacked, ransomware, major outage): Report to IT and leadership within <strong>1 hour</strong>. Do not wait until you are sure — report early.</li>
-    <li><strong>Client data may have been exposed:</strong> Tell leadership within <strong>2 hours</strong>. We are legally required to notify regulators within 72 hours in many cases.</li>
-    <li><strong>Lost or stolen laptop/phone:</strong> Report to IT immediately so we can remotely wipe the device before data is accessed.</li>
-    <li><strong>Suspicious email (phishing):</strong> Do not click links or attachments. Forward it to IT and delete it.</li>
-    <li><em>Tip: If something feels wrong, it probably is. Report first, investigate later.</em></li>
-  </ul>
+  <p><strong>What to do if something goes wrong (security incidents)</strong></p>
+  <div class="infographic">
+    <h3><span class="pulse-dot"></span>Incident response clock</h3>
+    <div class="timeline">
+      <div class="timeline-row"><div class="timeline-dot"></div><div class="timeline-text"><span class="when">Within 1 hour</span><strong>Critical incident</strong><span class="what">Hack, ransomware, outage — tell IT &amp; leadership.</span></div></div>
+      <div class="timeline-row"><div class="timeline-dot"></div><div class="timeline-text"><span class="when">Within 2 hours</span><strong>Client data possibly exposed</strong><span class="what">Tell leadership. Regulators get 72 hours.</span></div></div>
+      <div class="timeline-row"><div class="timeline-dot"></div><div class="timeline-text"><span class="when">Immediately</span><strong>Lost or stolen device</strong><span class="what">Tell IT so we can remote-wipe before it's accessed.</span></div></div>
+      <div class="timeline-row"><div class="timeline-dot"></div><div class="timeline-text"><span class="when">Don't click</span><strong>Suspicious email (phishing)</strong><span class="what">Forward to IT, then delete.</span></div></div>
+    </div>
+    <p style="font-size:.82rem;opacity:.8;margin:.4rem 0 0">If something feels wrong, it probably is. Report first, investigate later.</p>
+  </div>
 
   <p><strong>Software and devices</strong></p>
   <ul>
