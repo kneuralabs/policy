@@ -1,22 +1,15 @@
-<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" font-family="Inter,Arial,sans-serif">
   <!-- Deep Navy background -->
   <rect width="1200" height="630" fill="#0D2E5A"/>
   <!-- Left accent bar -->
   <rect width="6" height="630" fill="#1C5CAA"/>
   <!-- Bottom accent bar -->
   <rect y="600" width="1200" height="30" fill="#1C5CAA"/>
-  <!-- Red accent line -->
+  <!-- Red accent section -->
   <rect y="600" width="300" height="30" fill="#C8281E"/>
 
-  <!-- Logo mark (scaled up, centred left) -->
-  <!-- Blue field behind mark -->
-  <rect x="80" y="185" width="260" height="260" fill="#1C5CAA" rx="8"/>
-  <!-- Red inner notch -->
-  <polygon points="213,315 307,255 307,375" fill="#C8281E"/>
-  <!-- Silver upper arm -->
-  <polygon points="100,315 300,197 307,215 120,315" fill="#D0D2D6"/>
-  <!-- Silver lower arm -->
-  <polygon points="100,315 300,433 307,415 120,315" fill="#D0D2D6"/>
+  <!-- Logo PNG -->
+  <image href="LOGO.png" x="80" y="185" width="260" height="260"/>
 
   <!-- Brand name -->
   <text x="400" y="285" font-size="72" font-weight="700" letter-spacing="-1" fill="#F7F8FA">KNEURALABS</text>
