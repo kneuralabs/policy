@@ -4,13 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>KNEURALABS · Policy Handbook</title>
+<meta name="description" content="KNEURALABS internal policy handbook — AI governance, HR, finance, legal, IT security, conduct, and data privacy.">
+<meta property="og:title" content="KNEURALABS · Policy Handbook">
+<meta property="og:description" content="Internal policy handbook for KNEURALABS. Covers AI governance, HR, finance, legal, IT security, conduct, and data privacy.">
+<meta property="og:image" content="og-image.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KNEURALABS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KNEURALABS · Policy Handbook">
+<meta name="twitter:image" content="og-image.svg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="landing-container" id="landingContainer">
   <div class="landing-card">
-    <div class="main-title">KNEURALABS<br>Policy Handbook</div>
-    <div class="version-text">Version 2.0 · April 2026</div>
+    <svg class="kn-mark" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-label="Kneuralabs logo" role="img">
+      <rect width="72" height="72" fill="#1C5CAA" rx="6"/>
+      <polygon points="22,36 58,16 58,56" fill="#C8281E"/>
+      <polygon points="14,36 58,7 58,16 24,36" fill="#D0D2D6"/>
+      <polygon points="14,36 58,65 58,56 24,36" fill="#D0D2D6"/>
+    </svg>
+    <div class="main-title"><span>KNEURALABS</span><br>Policy Handbook</div>
+    <div class="version-text">Version 2.0 · Confidential</div>
     <div class="magic-form">
       <input type="text" id="magicWord" class="magic-field" placeholder="magic word" autocomplete="off" spellcheck="false">
       <button type="button" id="magicBtn" class="magic-btn">Enter</button>
@@ -19,15 +35,15 @@
   </div>
 </div>
 <script>
-  const btn = document.getElementById('magicBtn');
-  const inp = document.getElementById('magicWord');
-  const err = document.getElementById('magicError');
+  var btn = document.getElementById('magicBtn');
+  var inp = document.getElementById('magicWord');
+  var err = document.getElementById('magicError');
 
   function shake(el) {
     el.classList.remove('shake');
-    void el.offsetWidth; // force reflow to restart animation
+    void el.offsetWidth;
     el.classList.add('shake');
-    el.addEventListener('animationend', () => el.classList.remove('shake'), { once: true });
+    el.addEventListener('animationend', function(){ el.classList.remove('shake'); }, { once: true });
   }
 
   function check() {
@@ -35,7 +51,7 @@
       sessionStorage.setItem('knl_auth', '1');
       location.href = 'pages/overview.html';
     } else {
-      err.innerText = 'Wrong magic word';
+      err.textContent = 'Wrong magic word.';
       shake(inp);
       shake(err);
       inp.value = '';
@@ -44,7 +60,7 @@
   }
 
   btn.addEventListener('click', check);
-  inp.addEventListener('keypress', e => { if (e.key === 'Enter') check(); });
+  inp.addEventListener('keypress', function(e){ if (e.key === 'Enter') check(); });
 </script>
 </body>
 </html>
