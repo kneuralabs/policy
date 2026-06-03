@@ -24,6 +24,24 @@
 
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="shelf.css">
+
+<script>
+/* SSO gate — runs before body renders */
+(function(){
+  if(sessionStorage.getItem('kn-session')) return;
+  /* no session: inject full-screen iframe immediately */
+  document.write('<div id="sso-gate" style="position:fixed;inset:0;z-index:9999"><iframe src="https://sso.kneuralabs.com/?redirect=postmessage" style="width:100%;height:100%;border:none" allow="same-origin"></iframe></div>');
+  window.addEventListener('message',function h(e){
+    if(e.origin!=='https://sso.kneuralabs.com') return;
+    if(e.data&&e.data.type==='kn-auth'){
+      sessionStorage.setItem('kn-session',JSON.stringify({id:e.data.id,name:e.data.name,role:e.data.role}));
+      var g=document.getElementById('sso-gate');
+      if(g) g.remove();
+      window.removeEventListener('message',h);
+    }
+  });
+})();
+</script>
 </head>
 <body>
 <div id="root"></div>
