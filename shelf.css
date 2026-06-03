@@ -7,48 +7,29 @@
    ══════════════════════════════════════════════════════════════════ */
 
 :root{
-  --gilt:    oklch(0.86 0.085 86);
-  --gilt-hi: oklch(0.95 0.060 92);
+  --gilt:    oklch(0.74 0.090 78);
+  --gilt-hi: oklch(0.88 0.075 86);
   --cream:   oklch(0.965 0.018 88);
+  --font-serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
 
-  /* OAK (default) — warm honey timber */
-  --wd-1: oklch(0.62 0.058 64);
-  --wd-2: oklch(0.54 0.062 58);
-  --wd-3: oklch(0.46 0.060 54);
-  --wd-4: oklch(0.38 0.052 50);
-  --wd-grain: oklch(0.34 0.046 48 / 0.35);
-  --wd-back-1: oklch(0.40 0.046 52);
-  --wd-back-2: oklch(0.30 0.040 48);
-  --room: oklch(0.30 0.024 60);
+  /* ultra-minimal gallery surround — a clean, quiet room */
+  --room:     oklch(0.945 0.006 85);
+  --room-2:   oklch(0.915 0.008 84);
+  --ink:      oklch(0.26 0.014 70);
+  --ink-soft: oklch(0.46 0.012 70);
+  --ink-faint:oklch(0.62 0.010 72);
+  --hair:     oklch(0.86 0.008 80);
+  --shelf-line: oklch(0.80 0.010 78);
 }
-[data-wood="walnut"]{
-  --wd-1: oklch(0.46 0.046 52);
-  --wd-2: oklch(0.39 0.044 46);
-  --wd-3: oklch(0.32 0.040 42);
-  --wd-4: oklch(0.255 0.034 40);
-  --wd-grain: oklch(0.20 0.028 38 / 0.40);
-  --wd-back-1: oklch(0.285 0.034 44);
-  --wd-back-2: oklch(0.205 0.028 40);
-  --room: oklch(0.215 0.018 50);
-}
-[data-wood="mahogany"]{
-  --wd-1: oklch(0.50 0.080 38);
-  --wd-2: oklch(0.42 0.084 34);
-  --wd-3: oklch(0.345 0.078 30);
-  --wd-4: oklch(0.275 0.064 28);
-  --wd-grain: oklch(0.22 0.050 26 / 0.40);
-  --wd-back-1: oklch(0.305 0.060 32);
-  --wd-back-2: oklch(0.225 0.048 28);
-  --room: oklch(0.235 0.030 34);
-}
+/* timber tweaks retired — the shelf is minimal now, but keep the hooks
+   harmless so older saved states don't break */
+[data-wood="walnut"],[data-wood="mahogany"]{}
 
 html,body{height:100%}
 body{
-  background:
-    radial-gradient(120% 90% at 50% -10%, color-mix(in oklch,var(--room),#fff 8%), transparent 60%),
-    var(--room);
+  background:var(--room);
   font-family:var(--font-sans);
-  color:var(--cream);
+  color:var(--ink);
   min-height:100vh;
   overflow-x:hidden;
 }
@@ -56,154 +37,133 @@ body{
 /* ════════════════════════════════════════════════════════════
    PAGE FRAME
    ════════════════════════════════════════════════════════════ */
-.lib{max-width:1240px;margin:0 auto;padding:clamp(1.4rem,3.4vw,3rem) clamp(1rem,3vw,2.4rem) 4rem}
+.lib{max-width:1180px;margin:0 auto;padding:clamp(1.8rem,4vw,3.4rem) clamp(1rem,3vw,2.4rem) 5rem}
 
 .lib-top{
   display:flex;align-items:center;gap:1rem;
-  margin-bottom:clamp(1.4rem,3vw,2.6rem);
+  margin-bottom:clamp(2rem,4vw,3.4rem);
 }
 .lib-brand{display:flex;align-items:center;gap:.85rem;min-width:0}
-.lib-brand img{width:42px;height:42px;border-radius:8px;display:block;flex-shrink:0;
-  box-shadow:0 2px 10px rgba(0,0,0,.35)}
-.lib-brand .wm{font-size:1.18rem;font-weight:700;letter-spacing:-.01em;line-height:1}
-.lib-brand .tag{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.04em;
-  color:color-mix(in oklch,var(--cream),transparent 42%);margin-top:.34rem}
+.lib-brand img{width:38px;height:38px;border-radius:8px;display:block;flex-shrink:0;
+  box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lib-brand .wm{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;line-height:1;color:var(--ink)}
+.lib-brand .tag{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.04em;
+  color:var(--ink-faint);margin-top:.34rem}
 .lib-top .spacer{flex:1}
 .lib-top .count{
-  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;
-  color:color-mix(in oklch,var(--cream),transparent 35%);
-  border:1px solid color-mix(in oklch,var(--cream),transparent 80%);
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;
+  color:var(--ink-faint);
+  border:1px solid var(--hair);
   border-radius:999px;padding:.4rem .85rem;white-space:nowrap;
 }
 
-.lib-head{margin-bottom:clamp(1.6rem,3.4vw,2.8rem);max-width:48ch}
+.lib-head{margin-bottom:clamp(2.4rem,5vw,4rem);max-width:48ch}
 .lib-head h1{
-  font-size:clamp(2rem,5.4vw,3.2rem);font-weight:700;letter-spacing:-.03em;
-  line-height:1.02;text-wrap:balance;
+  font-family:var(--font-serif);
+  font-size:clamp(2.1rem,5.6vw,3.4rem);font-weight:600;letter-spacing:-.02em;
+  line-height:1.04;text-wrap:balance;color:var(--ink);
 }
-.lib-head h1 em{font-style:normal;color:var(--gilt)}
+.lib-head h1 em{font-style:italic;color:var(--ink)}
 .lib-head p{
-  margin-top:.85rem;font-size:clamp(.95rem,1.6vw,1.08rem);line-height:1.6;
-  color:color-mix(in oklch,var(--cream),transparent 28%);max-width:42ch;text-wrap:pretty;
+  margin-top:1rem;font-size:clamp(.95rem,1.6vw,1.08rem);line-height:1.6;
+  color:var(--ink-soft);max-width:44ch;text-wrap:pretty;
 }
 
 /* ════════════════════════════════════════════════════════════
-   THE BOOKCASE — timber frame + back panel + shelves
+   THE SHELVES — ultra-minimal: no cabinet, just books on hairlines,
+   each volume turned a few degrees so its spine shows.
    ════════════════════════════════════════════════════════════ */
 .bookcase{
-  position:relative;border-radius:12px;
-  padding:clamp(14px,2.2vw,26px);
-  background:
-    linear-gradient(180deg,var(--wd-back-1),var(--wd-back-2));
-  box-shadow:
-    0 40px 90px -30px rgba(0,0,0,.7),
-    0 4px 0 0 color-mix(in oklch,var(--wd-4),#000 30%),
-    inset 0 0 0 1px color-mix(in oklch,var(--wd-1),#fff 6%);
+  position:relative;
+  display:flex;flex-direction:column;
+  gap:clamp(2.6rem,5vw,4.4rem);
 }
-/* thick outer timber frame */
-.bookcase::before{
-  content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
-  border:clamp(12px,2vw,22px) solid transparent;
-  border-image:linear-gradient(150deg,var(--wd-1),var(--wd-3) 50%,var(--wd-4)) 1;
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.12),inset 0 -6px 14px rgba(0,0,0,.4);
-}
-/* real timber grain on the back panel + interior vignette */
-.bookcase::after{
-  content:"";position:absolute;inset:clamp(14px,2.2vw,26px);border-radius:4px;pointer-events:none;
-  background:url("tex/woodback.png") center/cover;
-  opacity:.85;mix-blend-mode:soft-light;
-}
-/* interior shadow box — the cabinet swallows light at its edges */
-.bookcase-inner-shade{
-  position:absolute;inset:clamp(14px,2.2vw,26px);border-radius:4px;pointer-events:none;z-index:4;
-  box-shadow:
-    inset 0 14px 26px -10px rgba(0,0,0,.75),
-    inset 0 -8px 20px -8px rgba(0,0,0,.6),
-    inset 18px 0 30px -22px rgba(0,0,0,.7),
-    inset -18px 0 30px -22px rgba(0,0,0,.7);
-}
+.bookcase::before,.bookcase::after{content:none}
+.bookcase-inner-shade{display:none}
 
 .shelf{position:relative;z-index:1}
-.shelf + .shelf{margin-top:6px}
 
-/* the row of standing books */
+/* the row of standing books, viewed in light perspective */
 .shelf-row{
   position:relative;z-index:2;display:grid;
-  grid-template-columns:repeat(var(--per,5),1fr);
-  gap:clamp(10px,1.8vw,24px);
+  grid-template-columns:repeat(var(--per,4),1fr);
+  gap:clamp(22px,3.4vw,52px);
   align-items:end;
-  padding:clamp(14px,2.4vw,30px) clamp(8px,1.6vw,22px) 0;
+  padding:0 clamp(6px,2vw,28px);
+  perspective:2600px;
+  perspective-origin:50% 64%;
 }
 
-/* the plank: surface the books rest on + the front rail that hides their base */
+/* the shelf itself: a single clean hairline ledge the books sit on */
 .shelf-plank{
-  position:relative;z-index:3;height:clamp(22px,2.6vw,32px);
-  margin-top:-7px;border-radius:2px 2px 5px 5px;
-  background:
-    url("tex/woodgrain.png") center/100% 100%,
-    linear-gradient(180deg,
-      color-mix(in oklch,var(--wd-1),#fff 18%) 0%,
-      var(--wd-1) 14%,
-      var(--wd-2) 52%,
-      var(--wd-3) 88%,
-      color-mix(in oklch,var(--wd-4),#000 12%) 100%);
-  background-blend-mode:soft-light,normal;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.22) inset,
-    0 -10px 18px -8px rgba(0,0,0,.55),   /* shadow the books drop onto the plank */
-    0 10px 22px -6px rgba(0,0,0,.55),     /* shadow the plank casts down */
-    0 2px 0 color-mix(in oklch,var(--wd-4),#000 22%);
+  position:relative;z-index:1;height:2px;margin-top:0;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--shelf-line) 6%,var(--shelf-line) 94%,transparent);
 }
-.shelf-plank::before{ /* warm gilt nosing on the front lip */
-  content:"";position:absolute;left:0;right:0;top:0;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,transparent,color-mix(in oklch,var(--gilt),transparent 55%) 30% 70%,transparent);
-  opacity:.5;
+.shelf-plank::before{
+  content:"";position:absolute;left:2%;right:2%;top:-10px;height:14px;border-radius:50%;
+  background:radial-gradient(ellipse 100% 100% at 50% 0,rgba(60,48,30,.20),transparent 72%);
+  filter:blur(5px);
 }
 
 /* ════════════════════════════════════════════════════════════
-   A BOOK ON THE SHELF (face-out cover)
+   A BOOK ON THE SHELF — a real volume turned a few degrees so you
+   read the front board AND see the spine receding into depth.
+   .book is the 3D context; .vol3d carries the tilt; the cover is
+   the front face and .book-spine is the bound left side.
    ════════════════════════════════════════════════════════════ */
 .book{
   position:relative;width:100%;aspect-ratio:var(--ar,62/90);align-self:end;
   border:none;background:none;padding:0;cursor:pointer;
-  transform:rotate(var(--rot,0deg));
-  transition:transform .34s cubic-bezier(.22,1,.36,1),filter .34s;
-  transform-origin:bottom center;
+  transform-style:preserve-3d;
+  transition:transform .42s cubic-bezier(.22,1,.36,1),filter .42s;
 }
-.book > .cover{position:relative;z-index:2}
-/* soft shadow the book throws onto the back panel (light from top-left) */
-.book::before{
-  content:"";position:absolute;inset:5% -4% -3% 4%;z-index:-2;border-radius:4px;
-  background:rgba(0,0,0,.5);filter:blur(10px);opacity:.5;
-  transition:opacity .34s,transform .34s;
-}
-/* contact occlusion + cast shadow where the book meets the plank */
+/* clean grounding shadow on the shelf */
 .book::after{
-  content:"";position:absolute;left:0%;right:-5px;bottom:-7px;height:16px;z-index:0;
-  background:
-    radial-gradient(ellipse 56% 120% at 46% 0%,rgba(0,0,0,.72),rgba(0,0,0,.28) 38%,transparent 72%);
-  filter:blur(2.4px);transition:opacity .34s,transform .34s;
+  content:"";position:absolute;left:-5%;right:5%;bottom:-10px;height:15px;z-index:-1;
+  background:radial-gradient(ellipse 58% 130% at 48% 0,rgba(54,42,24,.40),transparent 70%);
+  filter:blur(4px);transition:opacity .42s,transform .42s;
 }
-/* fore-edge page blocks — the book's real thickness */
-.book-edge{position:absolute;z-index:1;pointer-events:none}
-.book-edge.r{
-  top:5%;bottom:2%;right:-4px;width:6px;border-radius:0 2px 2px 0;
-  background:
-    repeating-linear-gradient(0deg,rgba(120,95,55,.30) 0 1px,transparent 1px 2.5px),
-    linear-gradient(90deg,#e7dcc1 0%,#d6c6a3 60%,#c3b08a 100%);
-  box-shadow:1px 0 2px rgba(0,0,0,.35),inset -1px 0 1px rgba(90,70,40,.4),inset 1px 0 1px rgba(255,255,255,.6);
+.vol3d{
+  position:absolute;inset:0;transform-style:preserve-3d;
+  transform:rotateY(var(--tilt,16deg));
+  transition:transform .42s cubic-bezier(.22,1,.36,1);
 }
-.book-edge.b{
-  left:5%;right:-3px;bottom:-4px;height:6px;border-radius:0 0 2px 2px;
-  background:
-    repeating-linear-gradient(90deg,rgba(120,95,55,.26) 0 1px,transparent 1px 2.5px),
-    linear-gradient(180deg,#e1d4b3 0%,#cbb993 100%);
-  box-shadow:0 1px 2px rgba(0,0,0,.42),inset 0 1px 1px rgba(255,255,255,.45);
+.book .cover{
+  position:absolute;inset:0;z-index:2;
+  transform:translateZ(calc(var(--thick,26px) / 2));
+  backface-visibility:hidden;
 }
-.book:hover{transform:translateY(-13px);filter:brightness(1.05)}
-.book:hover::after{transform:translateY(9px) scaleX(.9);opacity:.62}
-.book:hover::before{transform:translateY(-4px) scale(1.02);opacity:.4}
+/* the bound spine — the left side face, carrying the title bottom-up */
+.book-spine{
+  position:absolute;top:0;height:100%;left:0;width:var(--thick,26px);
+  transform:translateX(calc(var(--thick,26px) / -2)) rotateY(-90deg);
+  border-radius:2px 0 0 2px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:12px 0;
+  background:linear-gradient(90deg,
+    color-mix(in oklch,var(--cloth),#000 42%),
+    color-mix(in oklch,var(--cloth),#000 16%) 52%,
+    color-mix(in oklch,var(--cloth),#000 34%));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),inset 0 0 16px rgba(0,0,0,.5);
+}
+.book-spine::before{ /* faint cloth weave on the spine too */
+  content:"";position:absolute;inset:0;background:url("tex/clothweave.png");background-size:11px 11px;
+  opacity:.4;mix-blend-mode:overlay;pointer-events:none;
+}
+.sp-band{width:58%;height:2px;border-radius:1px;flex-shrink:0;position:relative;z-index:1;
+  background:linear-gradient(90deg,transparent,color-mix(in oklch,var(--gilt),transparent 14%),transparent)}
+.sp-title{
+  writing-mode:vertical-rl;transform:rotate(180deg);position:relative;z-index:1;
+  font-family:var(--font-sans);font-weight:600;
+  font-size:clamp(7px,1.5vw,10px);letter-spacing:.03em;
+  white-space:nowrap;overflow:hidden;max-height:62%;
+  color:color-mix(in oklch,var(--gilt),#fff 14%);text-shadow:0 1px 1px rgba(0,0,0,.55);
+}
+.book:hover{transform:translateY(-14px)}
+.book:hover .vol3d{transform:rotateY(7deg) translateZ(42px)}
+.book:hover::after{opacity:.5;transform:translateY(8px) scaleX(.92)}
 .book:active{transform:translateY(-7px)}
+.book:active .vol3d{transform:rotateY(11deg) translateZ(20px)}
 .book:focus-visible{outline:none}
 .book:focus-visible .cover{box-shadow:0 0 0 3px var(--gilt),var(--cover-shadow)}
 .book.is-reading{opacity:0;pointer-events:none}  /* hidden while its reader is open */
@@ -213,30 +173,46 @@ body{
    reused on the shelf AND as the closed front cover in the reader
    ════════════════════════════════════════════════════════════ */
 .cover{
-  --cover-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 14px 26px -10px rgba(0,0,0,.62), 0 4px 9px rgba(0,0,0,.42);
-  position:relative;width:100%;height:100%;border-radius:2px 5px 5px 2px;
+  --cover-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.34),          /* lit top board edge */
+    inset 1.5px 0 0 rgba(255,255,255,.10),           /* lit left edge */
+    inset 0 0 0 1px color-mix(in oklch,var(--cloth),#000 26%),
+    inset 0 0 22px -2px rgba(0,0,0,.34),             /* cloth pulled tight over the board edges */
+    inset 0 -10px 18px -10px rgba(0,0,0,.5),         /* shadowed lower board */
+    inset -2px 0 6px -3px rgba(0,0,0,.4),            /* shadowed right board edge */
+    0 16px 30px -12px rgba(0,0,0,.66),
+    0 5px 11px rgba(0,0,0,.45);
+  position:relative;width:100%;height:100%;border-radius:2.5px 7px 7px 2.5px;
   background:
-    linear-gradient(180deg,color-mix(in oklch,var(--cloth),#fff 7%),var(--cloth) 22%,color-mix(in oklch,var(--cloth),#000 16%));
+    radial-gradient(140% 120% at 24% 12%, color-mix(in oklch,var(--cloth),#fff 17%), transparent 50%),
+    radial-gradient(130% 130% at 82% 98%, color-mix(in oklch,var(--cloth),#000 30%), transparent 58%),
+    linear-gradient(180deg,color-mix(in oklch,var(--cloth),#fff 6%),var(--cloth) 26%,color-mix(in oklch,var(--cloth),#000 16%));
   box-shadow:var(--cover-shadow);
   overflow:hidden;isolation:isolate;
   display:flex;flex-direction:column;
 }
-/* real woven cloth texture */
+/* real woven cloth texture — fine warp/weft over the dyed buckram */
 .cover::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.42;
-  background:url("tex/clothweave.png");background-size:17px 17px;
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.62;
+  background:
+    url("tex/clothweave.png"),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 1px, transparent 1px 2.5px);
+  background-size:13px 13px, 2.5px 2.5px, 2.5px 2.5px;
   mix-blend-mode:overlay;
 }
-/* spine binding on the left + sheen sweeping across */
+/* spine joint groove on the left + raised cloth at the hinge + a soft sheen sweeping across */
 .cover::after{
   content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
   background:
     linear-gradient(90deg,
-      color-mix(in oklch,var(--cloth),#000 30%) 0,
-      color-mix(in oklch,var(--cloth),#000 6%) 3.5%,
-      color-mix(in oklch,var(--cloth),#fff 14%) 5%,
-      transparent 8%),
-    linear-gradient(108deg,transparent 38%,rgba(255,255,255,.10) 49%,transparent 60%);
+      color-mix(in oklch,var(--cloth),#fff 10%) 0,
+      color-mix(in oklch,var(--cloth),#000 4%) 2.2%,
+      color-mix(in oklch,var(--cloth),#000 34%) 4.2%,   /* the French groove — a real recessed joint */
+      color-mix(in oklch,var(--cloth),#000 2%) 5.4%,
+      color-mix(in oklch,var(--cloth),#fff 16%) 6.4%,   /* cloth bulges back up past the hinge */
+      transparent 9.5%),
+    linear-gradient(112deg,transparent 36%,rgba(255,255,255,.12) 49%,rgba(255,255,255,.03) 56%,transparent 64%);
 }
 
 /* ── shared cover furniture — every volume is LEFT-ALIGNED ── */
@@ -252,12 +228,22 @@ body{
 }
 .cv-eyebrow{
   font-family:var(--font-mono);font-size:clamp(.44rem,1.05vw,.62rem);letter-spacing:.16em;
-  text-transform:uppercase;color:color-mix(in oklch,var(--gilt),var(--cloth) 26%);position:relative;z-index:2;
+  text-transform:uppercase;color:color-mix(in oklch,var(--gilt),var(--cloth) 20%);position:relative;z-index:2;
+  text-shadow:0 .5px 0 rgba(0,0,0,.45),0 -.5px 0 color-mix(in oklch,var(--gilt-hi),transparent 55%);
 }
 .cv-title{
   font-family:var(--font-sans);font-weight:700;font-size:clamp(1rem,2.8vw,1.72rem);line-height:1.02;
-  letter-spacing:-.022em;color:color-mix(in oklch,var(--gilt),#fff 34%);text-shadow:0 1px 0 rgba(0,0,0,.35);
-  text-align:left;text-wrap:balance;position:relative;z-index:2;
+  letter-spacing:-.022em;text-align:left;text-wrap:balance;position:relative;z-index:2;
+  /* hot-foil stamp: a metallic vertical gradient pressed into the cloth */
+  color:transparent;
+  background:linear-gradient(176deg,
+    color-mix(in oklch,var(--gilt-hi),#fff 30%) 4%,
+    var(--gilt) 34%,
+    color-mix(in oklch,var(--gilt),#fff 22%) 52%,
+    color-mix(in oklch,var(--gilt),#000 22%) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 1px 1px rgba(0,0,0,.55),0 -1px 0 color-mix(in oklch,var(--gilt-hi),transparent 40%);
 }
 .cv-grow{flex:1 1 auto;min-height:.25rem}
 .cv-rule{height:1px;width:100%;background:color-mix(in oklch,var(--gilt),transparent 42%);position:relative;z-index:2}
@@ -267,6 +253,7 @@ body{
   width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:.5rem;position:relative;z-index:2;
   font-family:var(--font-mono);font-size:clamp(.42rem,1vw,.58rem);letter-spacing:.06em;
   color:color-mix(in oklch,var(--gilt),var(--cloth) 18%);
+  text-shadow:0 .5px 0 rgba(0,0,0,.4);
 }
 .cv-foot .vol{font-weight:600;letter-spacing:.04em;color:color-mix(in oklch,var(--gilt),#fff 12%)}
 .cv-row{display:flex;align-items:center;gap:.6rem;width:100%;position:relative;z-index:2}
@@ -363,7 +350,7 @@ body{
   position:absolute;top:clamp(.9rem,2.4vw,1.6rem);right:clamp(.9rem,2.4vw,1.6rem);z-index:30;
   width:44px;height:44px;border-radius:999px;cursor:pointer;border:none;
   display:flex;align-items:center;justify-content:center;
-  background:color-mix(in oklch,var(--cream),transparent 6%);color:var(--room);
+  background:var(--cream);color:var(--ink);
   box-shadow:0 6px 20px rgba(0,0,0,.5);transition:transform .2s,background .2s;
 }
 .reader-close:hover{transform:scale(1.07) rotate(90deg);background:var(--gilt)}
@@ -373,7 +360,7 @@ body{
   position:absolute;top:50%;transform:translateY(-50%);z-index:25;
   width:46px;height:46px;border-radius:999px;cursor:pointer;border:none;
   display:flex;align-items:center;justify-content:center;
-  background:color-mix(in oklch,var(--cream),transparent 22%);color:var(--room);
+  background:color-mix(in oklch,var(--cream),transparent 14%);color:var(--ink);
   box-shadow:0 6px 18px rgba(0,0,0,.45);transition:transform .2s,background .2s,opacity .2s;
 }
 .reader-paddle:hover{background:var(--gilt);transform:translateY(-50%) scale(1.08)}
@@ -438,57 +425,66 @@ body{
 }
 
 .page-head{
-  position:relative;z-index:6;flex-shrink:0;
-  padding:clamp(1.1rem,3vw,1.7rem) clamp(1.2rem,3.4vw,2rem) clamp(.9rem,2.4vw,1.2rem) clamp(1.5rem,4vw,2.4rem);
+  position:relative;z-index:6;flex-shrink:0;text-align:center;
+  padding:clamp(1.7rem,4.4vw,2.6rem) clamp(1.4rem,4vw,2.2rem) clamp(1.1rem,2.6vw,1.5rem);
   border-bottom:1px solid var(--rs-line);
-  background:linear-gradient(180deg,var(--rs-panel),var(--rs-bg));
+  background:var(--rs-bg);
 }
 .page-head .ph-code{
-  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;color:var(--accent);
-  display:flex;align-items:center;gap:.5rem;
+  font-family:var(--font-mono);font-size:.56rem;letter-spacing:.26em;color:var(--accent);
+  text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
 }
-.page-head .ph-code .pmark{width:12px;height:12px}
+.page-head .ph-code .pmark{display:none}
 .page-head h2{
-  margin-top:.5rem;font-size:clamp(1.25rem,3.6vw,1.7rem);font-weight:700;
-  letter-spacing:-.025em;line-height:1.05;color:var(--rs-text);text-wrap:balance;
+  margin-top:.75rem;font-family:var(--font-serif);font-size:clamp(1.45rem,4vw,2rem);font-weight:600;
+  letter-spacing:-.01em;line-height:1.1;color:var(--rs-text);text-wrap:balance;
+}
+.page-head h2::after{ /* a small chapter ornament under the title */
+  content:"";display:block;width:38px;height:1px;background:var(--rs-line2);margin:.95rem auto 0;
 }
 .page-head .ph-meta{
-  margin-top:.7rem;display:flex;gap:1.2rem;flex-wrap:wrap;
-  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.04em;color:var(--rs-faint);
+  margin-top:.85rem;display:flex;justify-content:center;gap:1.4rem;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:.56rem;letter-spacing:.1em;color:var(--rs-faint);
 }
 .page-head .ph-meta b{color:var(--rs-soft);font-weight:500}
 
+/* ── proper-book typography: serif, justified, indented, drop-capped ── */
 .page-body{
   position:relative;z-index:6;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
-  padding:clamp(1.2rem,3.4vw,1.9rem) clamp(1.2rem,3.4vw,2rem) clamp(1.6rem,4vw,2.4rem) clamp(1.5rem,4vw,2.4rem);
+  padding:clamp(1.5rem,4vw,2.3rem) clamp(1.4rem,4vw,2.2rem) clamp(1.6rem,4vw,2.4rem);
   scroll-behavior:smooth;
-  container-type:inline-size;  /* figures below adapt to the PAGE width, not the window */
 }
 .page-body::-webkit-scrollbar{width:9px}
 .page-body::-webkit-scrollbar-thumb{background:var(--rs-line2);border-radius:9px;border:3px solid var(--rs-bg)}
-/* tighten the reused .prose scale to fit the page */
-.page-body .prose{max-width:none;overflow-wrap:break-word}
-.page-body .prose p{font-size:.94rem;line-height:1.62;max-width:none}
-.page-body .prose li{font-size:.9rem;max-width:none}
-.page-body .prose p > strong:only-child{font-size:1.04rem;padding-top:1.1rem}
-.page-body .prose ul{margin:.9rem 0 1.1rem}
 
-/* ── editorial figures adapt to the (always narrow) reading page ──
-   These grids ship with viewport-width media queries, but the open book is a
-   fixed narrow column on every device — so a wide window would otherwise leave
-   them multi-column and clip them. Query the page container instead. */
-@container (max-width:480px){
-  .page-body .dos-donts{grid-template-columns:1fr}
-  .page-body .dos-donts .card.do{border-right:none;border-bottom:1px solid var(--rs-line2)}
-  .page-body .approval-steps,.page-body .process{grid-template-columns:1fr 1fr}
-  .page-body .approval-step::after{display:none}
-  .page-body .icon-grid{grid-template-columns:1fr 1fr}
-  .page-body .tier-row{grid-template-columns:84px 1fr}
+.page-body .prose{max-width:34rem;margin:0 auto;font-family:var(--font-serif)}
+.page-body .prose p{
+  font-family:var(--font-serif);font-size:1.02rem;line-height:1.66;color:var(--rs-text);
+  max-width:none;margin:0;text-align:justify;text-indent:1.35em;
+  hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty;
 }
-@container (max-width:330px){
-  .page-body .approval-steps,.page-body .process,
-  .page-body .icon-grid{grid-template-columns:1fr}
+.page-body .prose p:first-of-type{text-indent:0}
+/* drop cap to open the chapter, like a real book */
+.page-body .prose p:first-of-type::first-letter{
+  float:left;font-family:var(--font-serif);font-weight:700;
+  font-size:3.2em;line-height:.72;padding:.04em .1em 0 0;color:var(--rs-text);
 }
+.page-body .prose strong{font-weight:600;color:var(--rs-text)}
+
+/* section breaks become centred serif sub-titles with a hairline flourish */
+.page-body .prose p:has(> strong:only-child){text-indent:0;text-align:center;margin:2rem 0 .2rem}
+.page-body .prose p > strong:only-child{
+  display:block;font-family:var(--font-serif);font-weight:600;font-size:1.16rem;
+  letter-spacing:0;color:var(--rs-text);border-top:none;padding-top:0;margin:0;
+}
+.page-body .prose p > strong:only-child::before{
+  content:"";display:block;width:32px;height:1px;background:var(--rs-line2);margin:0 auto 1rem;
+}
+.page-body .prose ul{margin:.7rem 0 1rem;text-align:left}
+.page-body .prose li{font-family:var(--font-serif);font-size:.97rem;line-height:1.55;max-width:none}
+.page-body .plain-note{font-family:var(--font-serif);font-style:italic}
+.page-body .plain-note strong{font-style:normal}
 .page-foot-pager{
   margin-top:2rem;padding-top:1.1rem;border-top:1px solid var(--rs-line);
   display:flex;justify-content:space-between;gap:1rem;
@@ -502,14 +498,19 @@ body{
 .page-foot-pager button:hover:not(:disabled){color:var(--accent)}
 .page-foot-pager button:disabled{opacity:.28;cursor:default}
 .page-foot-pager .pf-dir{font-size:.56rem;letter-spacing:.16em;color:var(--rs-faint)}
-.page-foot-pager .pf-ttl{font-family:var(--font-sans);font-weight:600;font-size:.82rem;letter-spacing:-.01em;color:inherit}
+.page-foot-pager .pf-ttl{font-family:var(--font-serif);font-weight:600;font-size:.9rem;letter-spacing:-.01em;color:inherit}
 
 /* the front cover — hinged on the left, swings open */
 .book3d .cover{
   position:absolute;inset:0;z-index:10;
   transform-origin:left center;transform:rotateY(0deg);
   transition:transform .72s cubic-bezier(.62,.02,.34,1);
-  box-shadow:0 18px 40px -12px rgba(0,0,0,.6);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.34),
+    inset 0 0 0 1px color-mix(in oklch,var(--cloth),#000 26%),
+    inset 0 0 26px -2px rgba(0,0,0,.34),
+    inset 0 -12px 22px -12px rgba(0,0,0,.5),
+    0 22px 46px -14px rgba(0,0,0,.62);
 }
 .book3d.open .cover{transform:rotateY(-156deg)}
 /* the inside of the front cover (its back face) — endpaper cream */
@@ -565,22 +566,6 @@ body{
 @media(max-height:430px){
   .lib-head{margin-bottom:.7rem}
   .lib-head h1{font-size:clamp(1.5rem,6vw,2rem)}
-}
-
-/* notched / rounded-corner devices — keep content and the reader controls
-   clear of the safe-area insets (matters most for phones in landscape) */
-@supports(padding:max(0px)){
-  .lib{
-    padding-left:max(clamp(1rem,3vw,2.4rem),env(safe-area-inset-left));
-    padding-right:max(clamp(1rem,3vw,2.4rem),env(safe-area-inset-right));
-  }
-  .reader{
-    padding-left:max(clamp(1rem,4vw,3rem),env(safe-area-inset-left));
-    padding-right:max(clamp(1rem,4vw,3rem),env(safe-area-inset-right));
-  }
-  .reader-close{right:max(clamp(.9rem,2.4vw,1.6rem),env(safe-area-inset-right))}
-  .reader-paddle.prev{left:max(clamp(.6rem,2.6vw,2.2rem),env(safe-area-inset-left))}
-  .reader-paddle.next{right:max(clamp(.6rem,2.6vw,2.2rem),env(safe-area-inset-right))}
 }
 
 @media(prefers-reduced-motion:reduce){
