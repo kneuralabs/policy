@@ -20,6 +20,18 @@
   };
   const cloth = (i) => CLOTH[i % CLOTH.length];
   const NN = (i) => String(i + 1).padStart(2, "0");
+  /* proper book-title capitalization, preserving acronyms (HR, AI, IT) */
+  const titleCase = (s) => String(s).replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
+
+  /* a matched cloth set is uniform in size; only the dye lot drifts a hair */
+  const seed = (i, n) => { const x = Math.sin((i + 1) * 12.9898 + n * 78.233) * 43758.5453; return x - Math.floor(x); };
+  const clothFor = (i) => {
+    const b = CLOTH[i % CLOTH.length];
+    const d = (seed(i, 3) - 0.5) * 7;             // ±3.5% lightness — subtle sun-fade
+    return d >= 0
+      ? `color-mix(in oklch, ${b}, #fff ${d.toFixed(1)}%)`
+      : `color-mix(in oklch, ${b}, #000 ${(-d).toFixed(1)}%)`;
+  };
 
   function Chevron({ className }) {
     return (<svg className={className} viewBox="0 0 32 32" aria-hidden="true"><polygon points="6,16 24,7 24,11 13,16 24,21 24,25" fill="currentColor"></polygon></svg>);
@@ -43,7 +55,7 @@
       <div className="cv-pad cv-v1">
         <span className="cv-numeral" aria-hidden="true">{NN(idx)}</span>
         <div className="cv-eyebrow">{cat}</div>
-        <div className="cv-title">{p.navLabel}</div>
+        <div className="cv-title">{titleCase(p.navLabel)}</div>
         <span className="cv-grow"></span>
         <div className="cv-row"><Logo size="sm" /><Foot p={p} idx={idx} /></div>
       </div>
@@ -52,7 +64,7 @@
 
   function Cover({ p, idx, withBack }) {
     return (
-      <div className="cover" style={{ "--cloth": cloth(idx) }}>
+      <div className="cover" style={{ "--cloth": clothFor(idx) }}>
         <CoverArt p={p} idx={idx} />
         {withBack && (
           <div className="cover-back">
@@ -65,7 +77,8 @@
     );
   }
 
-  /* ── responsive shelf column count ── */
+  /* responsive shelf column count — self-correcting (no reliance on a
+     resize event firing after mount, which iframes don't always deliver) */
   function useCols(desktop) {
     const calc = () => {
       const w = window.innerWidth;
@@ -77,11 +90,20 @@
     const [cols, setCols] = useState(calc);
     useEffect(() => {
       const on = () => setCols(calc());
+      on();                                   // re-measure immediately
+      const raf = requestAnimationFrame(on);  // and again after first paint
+      const ti = setTimeout(on, 250);         // and once more once settled
       window.addEventListener("resize", on);
       window.addEventListener("orientationchange", on);
-      return () => { window.removeEventListener("resize", on); window.removeEventListener("orientationchange", on); };
+      let ro;
+      if (window.ResizeObserver) { ro = new ResizeObserver(on); ro.observe(document.documentElement); }
+      return () => {
+        cancelAnimationFrame(raf); clearTimeout(ti);
+        window.removeEventListener("resize", on);
+        window.removeEventListener("orientationchange", on);
+        if (ro) ro.disconnect();
+      };
     }, [desktop]);
-    useEffect(() => setCols(calc()), [desktop]);
     return cols;
   }
 
@@ -95,7 +117,7 @@
       <React.Fragment>
         <div className="page-head">
           <div className="ph-code"><Chevron className="pmark" />{p.code} · {CATEGORY[p.slug]}</div>
-          <h2>{p.title}</h2>
+          <h2>{titleCase(p.title)}</h2>
           <div className="ph-meta">
             <span>Reviewed <b>{reviewed}</b></span>
             <span>Vol. <b>{NN(idx)} / {NN(total - 1)}</b></span>
@@ -270,20 +292,17 @@
      ════════════════════════════════════════════════════════════ */
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "accent": "#2e6bd6",
-    "wood": "oak",
-    "perShelf": "5"
+    "perShelf": "4"
   }/*EDITMODE-END*/;
 
   function App() {
     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-    const cols = useCols(parseInt(t.perShelf, 10) || 5);
+    const cols = useCols(parseInt(t.perShelf, 10) || 4);
     const [reader, setReader] = useState(null); // { idx, rect } | null
 
     useEffect(() => {
-      const r = document.documentElement;
-      r.style.setProperty("--accent", t.accent);
-      r.setAttribute("data-wood", t.wood);
-    }, [t.accent, t.wood]);
+      document.documentElement.style.setProperty("--accent", t.accent);
+    }, [t.accent]);
 
     useEffect(() => {
       document.body.style.overflow = reader ? "hidden" : "";
@@ -313,10 +332,9 @@
         </div>
 
         <div className="bookcase">
-          <span className="bookcase-inner-shade" aria-hidden="true"></span>
           {shelves.map((row, si) => (
             <div className="shelf" key={si}>
-              <div className="shelf-row" style={{ "--per": row.length }}>
+              <div className="shelf-row" style={{ "--per": cols }}>
                 {row.map((p, li) => {
                   const gi = si * cols + li;
                   return (
@@ -324,12 +342,18 @@
                       key={p.slug}
                       className={"book" + (reader && reader.idx === gi ? " is-reading" : "")}
                       data-idx={gi}
+                      style={{ "--cloth": clothFor(gi) }}
                       onClick={(e) => openBook(gi, e.currentTarget)}
                       title={"Open " + p.title}
                     >
-                      <span className="book-edge r" aria-hidden="true"></span>
-                      <span className="book-edge b" aria-hidden="true"></span>
-                      <Cover p={p} idx={gi} />
+                      <span className="vol3d">
+                        <span className="book-spine" aria-hidden="true">
+                          <span className="sp-band"></span>
+                          <span className="sp-title">{titleCase(p.navLabel)}</span>
+                          <span className="sp-band"></span>
+                        </span>
+                        <Cover p={p} idx={gi} />
+                      </span>
                     </button>
                   );
                 })}
@@ -349,11 +373,8 @@
           <TweakColor label="Foil accent" value={t.accent}
             options={["#2e6bd6", "#1f4f8f", "#d4452e", "#3f7d63", "#6b57d6", "#b08428"]}
             onChange={(v) => setTweak("accent", v)} />
-          <TweakSection label="Cabinet" />
-          <TweakRadio label="Timber" value={t.wood} options={["oak", "walnut", "mahogany"]}
-            onChange={(v) => setTweak("wood", v)} />
           <TweakSection label="Shelving" />
-          <TweakRadio label="Per shelf" value={t.perShelf} options={["4", "5"]}
+          <TweakRadio label="Per shelf" value={t.perShelf} options={["3", "4", "5"]}
             onChange={(v) => setTweak("perShelf", v)} />
         </TweaksPanel>
       </div>
