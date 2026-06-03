@@ -462,6 +462,7 @@ body{
   position:relative;z-index:6;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
   padding:clamp(1.2rem,3.4vw,1.9rem) clamp(1.2rem,3.4vw,2rem) clamp(1.6rem,4vw,2.4rem) clamp(1.5rem,4vw,2.4rem);
   scroll-behavior:smooth;
+  container-type:inline-size;  /* figures below adapt to the PAGE width, not the window */
 }
 .page-body::-webkit-scrollbar{width:9px}
 .page-body::-webkit-scrollbar-thumb{background:var(--rs-line2);border-radius:9px;border:3px solid var(--rs-bg)}
@@ -471,6 +472,21 @@ body{
 .page-body .prose li{font-size:.9rem;max-width:none}
 .page-body .prose p > strong:only-child{font-size:1.04rem;padding-top:1.1rem}
 .page-body .prose ul{margin:.9rem 0 1.1rem}
+
+/* ── editorial figures adapt to the (always narrow) reading page ──
+   These grids ship with viewport-width media queries, but the open book is a
+   fixed narrow column on every device — so a wide window would otherwise leave
+   them multi-column and clip them. Query the page container instead. */
+@container (max-width:480px){
+  .page-body .dos-donts{grid-template-columns:1fr}
+  .page-body .dos-donts .card.do{border-right:none;border-bottom:1px solid var(--rs-line2)}
+  .page-body .approval-steps,.page-body .process{grid-template-columns:1fr 1fr}
+  .page-body .approval-step::after{display:none}
+  .page-body .tier-row{grid-template-columns:84px 1fr}
+}
+@container (max-width:330px){
+  .page-body .approval-steps,.page-body .process{grid-template-columns:1fr}
+}
 .page-foot-pager{
   margin-top:2rem;padding-top:1.1rem;border-top:1px solid var(--rs-line);
   display:flex;justify-content:space-between;gap:1rem;
@@ -547,6 +563,22 @@ body{
 @media(max-height:430px){
   .lib-head{margin-bottom:.7rem}
   .lib-head h1{font-size:clamp(1.5rem,6vw,2rem)}
+}
+
+/* notched / rounded-corner devices — keep content and the reader controls
+   clear of the safe-area insets (matters most for phones in landscape) */
+@supports(padding:max(0px)){
+  .lib{
+    padding-left:max(clamp(1rem,3vw,2.4rem),env(safe-area-inset-left));
+    padding-right:max(clamp(1rem,3vw,2.4rem),env(safe-area-inset-right));
+  }
+  .reader{
+    padding-left:max(clamp(1rem,4vw,3rem),env(safe-area-inset-left));
+    padding-right:max(clamp(1rem,4vw,3rem),env(safe-area-inset-right));
+  }
+  .reader-close{right:max(clamp(.9rem,2.4vw,1.6rem),env(safe-area-inset-right))}
+  .reader-paddle.prev{left:max(clamp(.6rem,2.6vw,2.2rem),env(safe-area-inset-left))}
+  .reader-paddle.next{right:max(clamp(.6rem,2.6vw,2.2rem),env(safe-area-inset-right))}
 }
 
 @media(prefers-reduced-motion:reduce){
