@@ -467,7 +467,7 @@ body{
 .page-body::-webkit-scrollbar{width:9px}
 .page-body::-webkit-scrollbar-thumb{background:var(--rs-line2);border-radius:9px;border:3px solid var(--rs-bg)}
 /* tighten the reused .prose scale to fit the page */
-.page-body .prose{max-width:none}
+.page-body .prose{max-width:none;overflow-wrap:break-word}
 .page-body .prose p{font-size:.94rem;line-height:1.62;max-width:none}
 .page-body .prose li{font-size:.9rem;max-width:none}
 .page-body .prose p > strong:only-child{font-size:1.04rem;padding-top:1.1rem}
@@ -482,10 +482,12 @@ body{
   .page-body .dos-donts .card.do{border-right:none;border-bottom:1px solid var(--rs-line2)}
   .page-body .approval-steps,.page-body .process{grid-template-columns:1fr 1fr}
   .page-body .approval-step::after{display:none}
+  .page-body .icon-grid{grid-template-columns:1fr 1fr}
   .page-body .tier-row{grid-template-columns:84px 1fr}
 }
 @container (max-width:330px){
-  .page-body .approval-steps,.page-body .process{grid-template-columns:1fr}
+  .page-body .approval-steps,.page-body .process,
+  .page-body .icon-grid{grid-template-columns:1fr}
 }
 .page-foot-pager{
   margin-top:2rem;padding-top:1.1rem;border-top:1px solid var(--rs-line);
