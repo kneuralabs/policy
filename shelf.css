@@ -389,6 +389,11 @@ body{
   box-shadow:0 30px 60px -18px rgba(0,0,0,.7),0 8px 18px rgba(0,0,0,.4);
   display:flex;flex-direction:column;
   opacity:0;transition:opacity .25s ease .12s;
+  /* own compositing layer so mobile WebKit paints the page reliably.
+     (an overflow child of a preserve-3d ancestor otherwise renders blank
+     on iOS Safari — the page never rotates, so flattening it is safe) */
+  transform:translateZ(0);-webkit-transform:translateZ(0);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
 }
 .book3d.open .page{opacity:1}
 
@@ -452,6 +457,7 @@ body{
 /* ── proper-book typography: serif, justified, indented, drop-capped ── */
 .page-body{
   position:relative;z-index:6;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
   padding:clamp(1.5rem,4vw,2.3rem) clamp(1.4rem,4vw,2.2rem) clamp(1.6rem,4vw,2.4rem);
   scroll-behavior:smooth;
 }
