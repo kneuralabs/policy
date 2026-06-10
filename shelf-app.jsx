@@ -6,6 +6,13 @@
   const { useState, useEffect, useRef, useCallback } = React;
   const DATA = window.POLICY_DATA || [];
 
+  /* sanitize policy HTML before injection; fall back to raw HTML if the
+     DOMPurify CDN failed to load so the page never breaks */
+  const sanitizeHTML = (html) =>
+    (window.DOMPurify && typeof window.DOMPurify.sanitize === "function")
+      ? window.DOMPurify.sanitize(html)
+      : html;
+
   /* matched cloth-bound set — one jewel hue per volume (oklch, even chroma) */
   const CLOTH = [
     "oklch(0.45 0.085 256)", "oklch(0.46 0.082 195)", "oklch(0.44 0.082 150)",
@@ -90,17 +97,19 @@
     const [cols, setCols] = useState(calc);
     useEffect(() => {
       const on = () => setCols(calc());
+      let deb = 0;
+      const debounced = () => { clearTimeout(deb); deb = setTimeout(on, 150); };
       on();                                   // re-measure immediately
       const raf = requestAnimationFrame(on);  // and again after first paint
       const ti = setTimeout(on, 250);         // and once more once settled
-      window.addEventListener("resize", on);
-      window.addEventListener("orientationchange", on);
+      window.addEventListener("resize", debounced);
+      window.addEventListener("orientationchange", debounced);
       let ro;
-      if (window.ResizeObserver) { ro = new ResizeObserver(on); ro.observe(document.documentElement); }
+      if (window.ResizeObserver) { ro = new ResizeObserver(debounced); ro.observe(document.documentElement); }
       return () => {
-        cancelAnimationFrame(raf); clearTimeout(ti);
-        window.removeEventListener("resize", on);
-        window.removeEventListener("orientationchange", on);
+        cancelAnimationFrame(raf); clearTimeout(ti); clearTimeout(deb);
+        window.removeEventListener("resize", debounced);
+        window.removeEventListener("orientationchange", debounced);
         if (ro) ro.disconnect();
       };
     }, [desktop]);
@@ -126,7 +135,7 @@
         </div>
         <div className="page-body" ref={bodyRef}>
           <div className="prose">
-            <div dangerouslySetInnerHTML={{ __html: p.html }} />
+            <div dangerouslySetInnerHTML={{ __html: sanitizeHTML(p.html) }} />
             {p.slug === "acknowledge" && <AckForm />}
             <div className="page-foot-pager">
               <button disabled={!prev} onClick={() => prev && onNav(-1)}>
